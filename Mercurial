@@ -1,0 +1,19 @@
+  Mercurial 
+
+Mercurial é uma ferramenta multi-plataforma de controle de versão distribuído para desenvolvedores de software. O sistema é implementado principalmente em Python, porém o utilitário binário diff foi escrito em C. Mercurial foi inicialmente escrito para rodar sobre Linux, mas foi portado para Windows, Mac OS X, e a maioria dos outros sistemas UNIX. Mercurial é principalmente um programa de linha de comando. Todas operações do Mercurial são chamadas através de palavras chave de opções para o programa controlador hg, uma referência para o símbolo químico do elemento Mercúrio.
+
+Instalando o Mercurial
+
+Linux
+Para ter o mercurial instalado em seu linux basta utilizar o gerenciador de pacotes de sua distribuição e instalar o pacote mercurial. Para a utilização a partir do Eclipse pode ser necessária a instalação de um pacote que permita ao seu ambiente solicitar a senha. O pacote ssh-askpass-gnome, ou apenas ssh-askpass caso não utilize o gnome, podem ser utilizados.
+Os nomes aqui utilizados estão presentes na última release do Debian, talvez ocorram pequenas alterações no nome para a sua distribuição.
+
+Clonando um repositório:
+O seguinte comando irá clonar fielmente o repositório na máquina local, é aconselhável não utilizar este repositório para trabalhar.
+$ hg clone http://hg.code.sf.net/p/adempiere/localization-br adempierelbr
+Se visualizarmos o diretório adempierelbr, perceberemos que dentro dele tem apenas um subdiretório ".hg"... é neste subdiretório que está todo o conteúdo do repositório. Os arquivos de trabalho serão gravados no diretório adempierelbr... mas como utilizaremos este apenas como clone do original, aqui ele vai ficar intocado. Nas partes seguintes deste guia, para padronizar e deixar mais claro o entendimento, este repositório local será referenciado como repostório local de referência, e o repositório remoto do projeto, será sempre referenciado como repositório remoto.
+
+ - Clonando o clone
+Para trabalharmos utilizaremos um outro clone, como cada clone é um repositório completo, basta ir um nível antes do clone feito no item anterior, e cloná-lo novamente:
+$ hg clone adempierelbr lbrwork
+Pronto... agora a pasta lbrwork é um clone do clone, deve-se preferir trabalhar dentro desta pasta. Igualmente aos outros repositórios, todas as referências posteriores a este serão identificadas como repositório de trabalho.
