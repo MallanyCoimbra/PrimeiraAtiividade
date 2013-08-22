@@ -17,3 +17,23 @@ Se visualizarmos o diretório adempierelbr, perceberemos que dentro dele tem ape
 Para trabalharmos utilizaremos um outro clone, como cada clone é um repositório completo, basta ir um nível antes do clone feito no item anterior, e cloná-lo novamente:
 $ hg clone adempierelbr lbrwork
 Pronto... agora a pasta lbrwork é um clone do clone, deve-se preferir trabalhar dentro desta pasta. Igualmente aos outros repositórios, todas as referências posteriores a este serão identificadas como repositório de trabalho.
+
+Escolhendo a branch de origem:
+Ao trabalhar com o localization_br, todo o desenvolvimento deve ter por base a branch "development", portanto, precisamos "selecionar" esta branch como sendo a nossa origem, deve-se entrar no diretório de trabalho "lbrwork" e rodar o comando "hg update"
+$ cd lbrwork
+$ hg update development
+Após este comando, os arquivos do repositório ".hg" serão copiados para o diretório lbrwork, e já podem ser editados livremente, porém, é aconselhável iniciar uma branch para este trabalho, isto permite isolar cada desenvolvimento um do outro.
+Os arquivos e diretórios gravados diretamente dentro da pasta lbrwork, será sempre referenciado como diretório de trabalho. Atenção, não confundir com repositório de trabalho, já citado anteriormente, que é todo o repositório, contido dentro da pasta .hg.
+
+- Criando uma branch
+Criar uma branch é simples... basta digitar o seguinte comando:
+$ hg branch fulano
+A partir deste ponto, seu repositório tem uma branch chamada fulano. É aconselhável nunca editar diretamente os branches stable e development do localization_br, estas branches devem apenas receber merge das branches dos desenvolvedores, de acordo com o Guia de desenvolvimento.
+
+Colocando as mãos na massa
+Este é o ponto onde você apenas precisa cuidar do código, programar mesmo, aquele que é o nosso objetivo! É só apontar o seu editor ou interface preferida para os arquivos do diretório de trabalho e fazer as coisas evoluírem.
+
+Adicionando arquivos
+Por default, qualquer arquivo novo criado no diretório de trabalho não será adicionado ao repositório de trabalho. Para avisar o Mercurial que um arquivo deve fazer parte dele, utiliza-se o comando "add":
+$ hg add nomedoarquivo.ext
+Caso o comando seja executado sem fornecer um nome de arquivo, todos os arquivos do diretório serão adicionados ao repositório de trabalho.
