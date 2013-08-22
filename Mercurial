@@ -63,3 +63,26 @@ O comando "update" faz exatamente isso, altera os arquivos do diretório de trab
 Sempre antes de executar o comando "update", certifique-se de que todas as alterações efetuadas no diretório de trabalho foram salvas no repositório de trabalho através do comando "commit".
 O seguinte exemplo alterna o diretório de trabalho para a branch "stable":
 
+O Merge
+Um dos princípios básicos do Mercurial é que ele memoriza a base de cada alteração, portanto, é possível que dentro de um mesmo branch existam duas ou mais "heads". Enquanto cada desenvolvedor trabalhar dentro de sua própria branch, isto não ocorrerá. Mas, um determinado grupo de desenvolvedores pode mexer em uma branch "comunitária", e então esta situação pode ocorrer.
+Neste pequeno tutorial não abordarei além disso sobre merges dentro de uma mesma branch, para mais detalhes disso é aconselhável uma leitura mas completa do livro citado no início deste artigo. O capítulo 3 do livro aborda bem este assunto.
+Agora, o merge de uma branch para outra, que é o ideal de organização de um projeto.
+Digamos que a branch "fulano/resposta" implemente o método que faz o Adempiere responder à pergunta essencial sobre a vida, o universo e tudo mais... chegou a hora de agregar esta feature ao branch "development" para mais testes:
+$ hg update development
+$ hg pull -u
+$ hg merge fulano/resposta
+O primeiro comando marca o diretório de trabalho para utilizar o branch "development"
+O segundo comando se certifica de que estamos atualizados com relação ao repositório de origem. Atenção: Como o nosso reositório de trabalho foi clonado de um outro repositório local, é necessário antes desta sequência atualizar também o repositório local de referência.
+Por último, o comando merge copia as alterações do branch "fulano/resposta" para o branch "development", o retorno para este comando pode ser algo similar ao seguinte:
+1 files updated, 0 files merged, 0 files removed, 0 files unresolved
+(branch merge, don't forget to commit)
+Notem a última linha da saída... ela indica que precisamos dar o commit para que a mudança seja efetivada. Por enquanto ela está apenas no diretório de trabalho. O seguinte comando colocará ela no repositório de trabalho:
+$ hg commit -u "agregando funcionalidades"
+Lembre-se de fazer também o "push" para distribuir a contribuição aos outros desenvolvedores, pois o "commit" apenas atualiza o repositório de trabalho local.
+
+O merge ao contrário
+Para fazer testes antes de agregar o seu trabalho à outra branch, pode ser necessário trazer as últimas alterações da branch "development" para a sua branch de trabalho. Por exemplo se estivéssemos implementando um novo recurso na branch "fulano/FR42" e queremos testá-la com todas as alterações que foram feitas na branch "development" desde que iniciamos a branch "fulano/FR42", devemos fazer um merge da "development" para a "fulano/FR42":
+$ hg update fulano/FR42
+$ hg merge development
+Se não houverem conflitos, tudo o que foi implementado na "development" desde a criação da branch "fulano/FR42" foi agregado à ela. Caso alguma alteração que ocorreu na branch "development" conflite com uma alteração da "fulano/FR42" o Mercurial tentará resolver, e se não conseguir executará alguma ferramenta para a resolução manual. Esta ferramenta pode ser configurada pela variável de ambiente "HGMERGE". Existem diversas ferramentas, por exemplo o kdiff3 (qt/KDE), o meld (Gnome) e o winmerge (Windows). Como sempre, o nosso livro de referência dá bastante detalhes sobre isso.
+
