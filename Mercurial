@@ -86,3 +86,16 @@ $ hg update fulano/FR42
 $ hg merge development
 Se não houverem conflitos, tudo o que foi implementado na "development" desde a criação da branch "fulano/FR42" foi agregado à ela. Caso alguma alteração que ocorreu na branch "development" conflite com uma alteração da "fulano/FR42" o Mercurial tentará resolver, e se não conseguir executará alguma ferramenta para a resolução manual. Esta ferramenta pode ser configurada pela variável de ambiente "HGMERGE". Existem diversas ferramentas, por exemplo o kdiff3 (qt/KDE), o meld (Gnome) e o winmerge (Windows). Como sempre, o nosso livro de referência dá bastante detalhes sobre isso.
 
+
+Plugin para o Eclipse
+
+ATENÇÃO: Esta parte do guia não dispensa a leitura da parte anterior, ela depende de muitos conceitos explicados nela. Se você pulou pra cá, volte e leia as informações sobre a linha de comando para que possa entender como o plugin funciona.
+Um plugin muito bom para utilizar o Mercurial no Eclipse é o MercurialEclipse, no site dele você encontra instruções para a instalação.
+
+Chave SSH
+A autenticação SSH para o servidor do SourceForge.net pode ser um pouco chata ao utilizar o Eclipse, para isso pode ser interessante seguir este guia do sf.net para configurar as chaves SSH
+A partir da alteração para o ambiente Allura do SourceForge.net, está sendo suportado o acesso leitura e escrita através do protocolo HTTPS, com autenticação de usuário e senha, não é mais necessário utilizar chaves SSH!
+
+Operações Básicas
+Nas seções a seguir, algumas galerias com screenshots de operações básicas. Todas as opções estão disponíveis através do submenu "Team", acessado pelo botão direito no Package Explorer. Se preferir, o menu Team abre diretamente se for selecionada a perspectiva Team Syncronize.
+
