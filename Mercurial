@@ -37,3 +37,29 @@ Adicionando arquivos
 Por default, qualquer arquivo novo criado no diretório de trabalho não será adicionado ao repositório de trabalho. Para avisar o Mercurial que um arquivo deve fazer parte dele, utiliza-se o comando "add":
 $ hg add nomedoarquivo.ext
 Caso o comando seja executado sem fornecer um nome de arquivo, todos os arquivos do diretório serão adicionados ao repositório de trabalho.
+
+A hora do commit
+Após editar o código, testar, debugar, corrigir, testar de novo e ver que deu certo, chegou a hora de dar o commit... o comando para isso é o seguinte:
+$ hg commit
+Mas, espere um pouco... este comando apenas pega os arquivos do diretório de trabalho e coloca no diretório ".hg", que é o repositório de trabalho. Para publicar de verdade este trabalho, é preciso fazer um "push". É isso mesmo, o push é o novo commit:
+$ hg push --new-branch https://fulano@hg.code.sf.net/p/adempiere/localization-br
+Lógico que "fulano" deve ser substituído pelo seu nome de usuário no sf.net, e a sua senha será solicitada.
+O parâmetro --new-branch é necessário pois por padrão o Mercurial se recusa a publicar novas branches, é uma medida de segurança.
+Caso o último parâmetro, que é o endereço de escrita do repositório não seja fornecido, ele irá atualizar o repositório de onde foi feito o clone. Como este é o repositório de trabalho, que foi "clonado do clone", executar o push sem parâmetro, apenas atualizaria o repositório local de referência na máquina local... o que também pode ser feito, para manter as coisas sincronizadas.
+
+Atualizando o repositório
+Com alguma frequência é necessário que atualizemos o nosso repositório de trabalho para receber as mais novas atualizações dos desenvolvedores, para isto existe o comando "pull":
+$ hg pull 
+Como já vimos antes, isto vai trazer as alterações a partir da origem do repositório atual, que, no caso do repositório de trabalho é o repositório local de referência. Portanto, neste exemplo, a melhor sequência de comandos é a seguinte:
+$ cd ../adempierelbr
+$ hg pull
+$ cd ../lbrwork
+$ hg pull
+
+Alternando entre branches
+Aqui aparece uma das maravilhas do Mercurial: É possível alternar entre uma branch e outra!
+No momento em que executamos o comando "update" no tópico que escolheu a branch de origem, o nosso diretório de trabalho passou a ter os arquivos da branch "development". E, após a execução do comando que criou a branch "fulano", tais arquivos passaram a fazer parte desta branch.
+O comando "update" faz exatamente isso, altera os arquivos do diretório de trabalho para que reflitam a branch referida. O comando update não vive só de branches, é possível alternar para qualquer ponto do repositório, uma revisão, changeset, tag ou branch.
+Sempre antes de executar o comando "update", certifique-se de que todas as alterações efetuadas no diretório de trabalho foram salvas no repositório de trabalho através do comando "commit".
+O seguinte exemplo alterna o diretório de trabalho para a branch "stable":
+
